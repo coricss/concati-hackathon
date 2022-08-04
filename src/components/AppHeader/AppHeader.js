@@ -8,7 +8,9 @@ class AppHeader extends React.Component {
   onClickRegister = () => {
     window.location.href = '/register';
   }
-  
+  onClickLogin = () => {
+    window.location.href = '/login';
+  }
   render(){
     return(
       <div className='AppHeader'data-testid="AppHeader">
@@ -22,8 +24,8 @@ class AppHeader extends React.Component {
                 </div>
               </a>
               <div className="d-flex align-items-center gap-2">
-                <button className='btn btn-primary btn-login fw-bold'>Login</button>
-                <button className='btn btn-outline-danger btn-sign-up fw-bold' onClick={this.onClickRegister}>Get Started</button>
+                <button className='btn btn-primary btn-login fw-bold' onClick={this.onClickLogin}>Login</button>
+                <button className='btn btn-outline-danger btn-sign-up fw-bold' onClick={this.onClickRegister}>Get started</button>
               </div>
             </div>
             
