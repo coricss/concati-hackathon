@@ -3,8 +3,14 @@
   padding: 10px;
 }
 
-.btn-login, .btn-sign-up {
-  outline: none !important;
+.btn-login {
+  background: transparent !important;
   border: none !important;
+  box-shadow: none !important;
+}
+
+.btn-sign-up {
+  outline: none !important;
+
   box-shadow: none !important;
 }
