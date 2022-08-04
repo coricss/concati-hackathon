@@ -1,0 +1,10 @@
+.AppHeader {
+  /* background-color: black; */
+  padding: 10px;
+}
+
+.btn-login, .btn-sign-up {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}

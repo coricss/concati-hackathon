@@ -1,0 +1,21 @@
+.AppHomeContent {
+  min-height: 100vh;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.AppTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AppHomeTitle h1{
+  font-size:3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
