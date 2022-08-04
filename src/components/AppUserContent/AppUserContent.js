@@ -29,13 +29,13 @@ class AppUserContent extends React.Component {
 
   handleCopyText = () => {
     navigator.clipboard.writeText(document.getElementById('copy-text').innerText);
-    document.getElementById('alert-copy').classList.remove('d-none');
+    document.getElementById('alert-copy').classList.remove('opacity-0');
     document.getElementById('btn-link').classList.remove('border-danger');
     document.getElementById('btn-link').classList.add('border-success');
     document.getElementById('link-icon').classList.remove('text-danger');
     document.getElementById('link-icon').classList.add('text-success');
     setTimeout(() => {
-      document.getElementById('alert-copy').classList.add('d-none');
+      document.getElementById('alert-copy').classList.add('opacity-0');
       document.getElementById('btn-link').classList.add('border-danger');
       document.getElementById('link-icon').classList.add('text-danger');
     }, 2000);
@@ -58,9 +58,9 @@ class AppUserContent extends React.Component {
               <URLText></URLText>
             </p>
           </button>
-          <small className='text-success mt-1 d-none' id='alert-copy'>Copied to clipboard</small>
+          <small className='text-success mt-1 opacity-0' id='alert-copy'>Copied to clipboard</small>
         </div>
-        <div className="AppUserContent__messages mt-5 w-50 text-white">
+        <div className="AppUserContent__messages mt-4 w-50 text-white">
           <h6>Received Messages</h6>
           <hr />
           <div className="AppUserContent__messages__message border px-5 py-4 rounded-5 text-start mb-3">
@@ -68,7 +68,7 @@ class AppUserContent extends React.Component {
               <h6>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure minima sint iusto eos labore maiores nemo doloremque, quibusdam vitae quam.
               </h6>
-              <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content-between align-items-center'>
                 <small className='text-muted me-3'>{new Date().toLocaleTimeString()}</small>
                 <FaTrash className='text-danger' style={{cursor: 'pointer'}}></FaTrash>
               </div>
