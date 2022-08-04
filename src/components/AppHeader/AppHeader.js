@@ -25,7 +25,7 @@ class AppHeader extends React.Component {
               </a>
               <div className="d-flex align-items-center gap-2">
                 <button className='btn btn-primary btn-login fw-bold' onClick={this.onClickLogin}>Login</button>
-                <button className='btn btn-outline-danger btn-sign-up fw-bold' onClick={this.onClickRegister}>Get started</button>
+                <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.onClickRegister}>Get started</button>
               </div>
             </div>
             

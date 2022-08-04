@@ -22,7 +22,7 @@ class AppHomeContent extends React.Component {
                 <p className='fs-5'>Make your link below and get their messages anonymously!</p>
               </div>
               <div className='AppMainButton w-100 text-lg-start text-center'>
-                <button className='btn btn-outline-danger btn-get-link btn-lg p-3 px-4' onClick={this.onClickRegister}>
+                <button className='btn btn-outline-danger btn-get-link btn-lg p-3 px-4 rounded-5' onClick={this.onClickRegister}>
                   Create your link
                 </button>
               </div>

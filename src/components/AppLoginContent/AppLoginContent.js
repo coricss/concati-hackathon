@@ -15,14 +15,14 @@ class AppLoginContent extends React.Component {
               <hr className='text-white'></hr>
               <center className='mt-4'>
                 <div className="form-group mb-3 login-inputs">
-                  <input type="text" className="form-control" id="username" placeholder="Username" />
+                  <input type="text" className="form-control" id="username" placeholder="Username" required />
                 </div>
                 <div className="form-group mb-3 login-inputs">
-                  <input type="password" className="form-control" id="pwd" placeholder="Password" />
+                  <input type="password" className="form-control" id="pwd" placeholder="Password" required />
                 </div>
                 
                 <div className="form-group w-100">
-                  <button className='btn btn-danger btn-lg w-75'>Login</button>
+                  <button className='btn btn-danger btn-lg w-75 rounded-5'>Login</button>
                 </div>
                 <div className="mb-3 text-white d-lg-flex justify-content-between w-75">
                   <div className='m-1'>

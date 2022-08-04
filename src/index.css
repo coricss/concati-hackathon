@@ -9,8 +9,12 @@ body {
   background-color: #0e0e0e !important;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden !important;
+
 }
 
+button {
+  box-shadow: none !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
