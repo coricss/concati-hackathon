@@ -6,11 +6,11 @@ class AppRegisterContent extends React.Component {
   render(){
     return(
       <div className="AppRegisterContent" data-testid="AppRegisterContent">
-        <div className="container">
-          <div className='form-container'>
-            <form className='w-50'>
+        <div className="">
+          <div className='register-form-container'>
+            <form>
               <div className="form-group text-uppercase">
-                <h1 className='text-danger'>Register Here</h1>
+                <h1 className='text-danger'>Register</h1>
               </div>
               <hr className='text-white'></hr>
               <center className='mt-4'>
@@ -31,7 +31,7 @@ class AppRegisterContent extends React.Component {
                   <label htmlFor='checkbox'>I am over 18 years old</label>
                 </div>
                 <div className="form-group w-100 mb-3">
-                  <button className='btn btn-danger btn-lg w-75 rounded-5' >Get started</button>
+                  <button className='btn btn-danger btn-lg w-100 rounded-5' >Get started</button>
                 </div>
                 <small className='text-white'>Already have an account? <a href='/login' className='text-danger fw-bold text-decoration-none'>Login</a></small>
               </center>

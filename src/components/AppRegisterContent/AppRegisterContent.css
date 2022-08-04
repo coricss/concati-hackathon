@@ -7,16 +7,19 @@
   align-items: center;
 }
 
-.form-container {
+.register-form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.register-form-container form {
+  width: 190%;
+}
 
 .register-inputs input {
-  width: 75%;
+  width: 100%;
   height: 50px;
   border-radius: 50px;  
   padding: 0 10px;

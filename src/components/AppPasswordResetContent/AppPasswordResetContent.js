@@ -57,7 +57,7 @@ class AppPasswordResetContent extends React.Component {
                     <input type="email" className="form-control" id="email" placeholder="Email" onChange={this.onChangeEmail} required/>
                   </div>
                   <div className="form-group w-100">
-                    <button className='btn btn-danger btn-lg w-75 rounded-5' onClick={this.submitEmail} disabled={this.state.isTypeEmail == false ? true : false}>Reset</button>
+                    <button className='btn btn-danger btn-lg w-75 rounded-5' onClick={this.submitEmail} disabled={this.state.isTypeEmail == false ? true : false}>Done</button>
                   </div>
                 </center>
               </>

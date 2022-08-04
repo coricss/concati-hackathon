@@ -9,12 +9,28 @@ body {
   background-color: #0e0e0e !important;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden !important;
-
+  
 }
 
 button {
   box-shadow: none !important;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dc3546;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #0e0e0e;
+  border-radius: 50px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

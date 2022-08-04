@@ -1,0 +1,28 @@
+.AppUserContent {
+  min-height: 100vh;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center
+}
+
+.AppUserContent__header {
+  /* text-transform: uppercase; */
+}
+
+.AppUserContent__header h1 {
+  font-weight: 700;
+}
+
+.AppUserContent__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.user-link-container {
+  width: 350px;
+  background-color: #1d1d1d;
+}
