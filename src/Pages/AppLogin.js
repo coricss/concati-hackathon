@@ -1,18 +1,18 @@
 import AppHeader from '../components/AppHeader/AppHeader';
 import AppFooter from '../components/AppFooter/AppFooter';
-import AppRegisterContent from '../components/AppRegisterContent/AppRegisterContent';
+import AppLoginContent from '../components/AppLoginContent/AppLoginContent';
 import React from 'react';
 
-class AppRegister extends React.Component {
+class AppLogin extends React.Component {
   render() {
     return (
       <>
         <AppHeader></AppHeader>
-        <AppRegisterContent></AppRegisterContent>
+        <AppLoginContent></AppLoginContent>
         <AppFooter></AppFooter>
       </>
     );
   }
 }
 
-export default AppRegister;
+export default AppLogin;
