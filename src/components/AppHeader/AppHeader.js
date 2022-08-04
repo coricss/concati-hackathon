@@ -2,21 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './AppHeader.css';
 
+import logo from '../../images/TellMe-logo.png';
 class AppHeader extends React.Component {
+
+  onClickRegister = () => {
+    window.location.href = '/register';
+  }
+  
   render(){
     return(
       <div className='AppHeader'data-testid="AppHeader">
         <nav className="navbar navbar-expand-lg">
           <div className="container">
             <div className="d-flex justify-content-between align-items-center w-100">
-              <div>
-                <a className="navbar-brand" href="#">
-                  <img src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" alt="Keep logo" />
-                </a>
-              </div>
+              <a className="navbar-brand" href="/">
+                <div className='d-flex align-items-center'>
+                  <img src={ logo } alt="Keep logo" width='50px' />
+                  <h1 className='fw-bold text-danger ms-2 m-0'>TellMe</h1>
+                </div>
+              </a>
               <div className="d-flex align-items-center gap-2">
-                <button className='btn btn-primary btn-login'>Login</button>
-                <button className='btn btn-primary btn-sign-up'>Get Started</button>
+                <button className='btn btn-primary btn-login fw-bold'>Login</button>
+                <button className='btn btn-outline-danger btn-sign-up fw-bold' onClick={this.onClickRegister}>Get Started</button>
               </div>
             </div>
             

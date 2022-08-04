@@ -1,19 +1,18 @@
-import React from 'react';
-
 import AppHeader from '../components/AppHeader/AppHeader';
 import AppFooter from '../components/AppFooter/AppFooter';
-import AppHomeContent from '../components/AppHomeContent/AppHomeContent';
+import AppRegisterContent from '../components/AppRegisterContent/AppRegisterContent';
+import React from 'react';
 
-class AppHome extends React.Component {
+class AppRegister extends React.Component {
   render() {
     return (
       <>
         <AppHeader></AppHeader>
-        <AppHomeContent></AppHomeContent>
+        <AppRegisterContent></AppRegisterContent>
         <AppFooter></AppFooter>
       </>
     );
   }
 }
 
-export default AppHome;
+export default AppRegister;

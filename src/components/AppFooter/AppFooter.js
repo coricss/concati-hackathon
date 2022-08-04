@@ -7,6 +7,8 @@ import {
   FaGithub
 } from 'react-icons/fa';
 
+import logo from '../../images/TellMe-logo.png';
+
 const AppFooter = () => (
   <div className="AppFooter" data-testid="AppFooter">
     <div className="container">
@@ -44,9 +46,12 @@ const AppFooter = () => (
           </div>
         </div>
         <div className="col-4">
-          <div className="AppFooterContent d-flex justify-content-center">
-            <img src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" alt="Keep logo" width='100px'/>
-          </div>
+          <a className="brand text-decoration-none d-flex justify-content-center" href="/">
+            <div className='d-flex align-items-center'>
+              <img src={ logo } alt="Keep logo" width='50px' />
+              <h1 className='fw-bold text-danger ms-2 m-0'>TellMe</h1>
+            </div>
+          </a>
         </div>
         
       </div>
