@@ -9,7 +9,7 @@ class AppLoginContent extends React.Component {
       //hardcoded for now
       username: 'rics',
       password: '123',
-      isLoggin: false,
+      isLogin: false,
       error: '',
       loading: false,
     };
@@ -40,9 +40,10 @@ class AppLoginContent extends React.Component {
     if( username == this.state.username && password == this.state.password ){
       setTimeout(() => {
         this.setState({
-          isLoggin: true
+          isLogin: true
         });
-        //set username to localstorage for now
+        //set username and login status to localstorage for now
+        localStorage.setItem('isLogin', true);
         localStorage.setItem('username', username);
         window.location.href = '/inbox';
       }, 2000);
