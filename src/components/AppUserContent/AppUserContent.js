@@ -18,7 +18,7 @@ function withParams(Component) {
 
 function URLText () {
   const location = useLocation();
-  return <>{window.location.host+/user/+localStorage.getItem('username')}</>;
+  return <>{window.location.host+'/user/'+localStorage.getItem('username')}</>;
 }
 
 class AppUserContent extends React.Component {
@@ -26,6 +26,12 @@ class AppUserContent extends React.Component {
     super(props);
   }
 
+  userCheck = () => {
+    if(localStorage.getItem('isLogin') == 'true'){
+      return true;
+    }
+    window.location.href = '/login';
+  }
 
   handleCopyText = () => {
     navigator.clipboard.writeText(document.getElementById('copy-text').innerText);
@@ -42,7 +48,7 @@ class AppUserContent extends React.Component {
   }
 
   render(){
-    console.log();
+    this.userCheck();
     return(
       <div className="AppUserContent" data-testid="AppUserContent">
         <div className="AppUserContent__header text-danger">
@@ -61,7 +67,7 @@ class AppUserContent extends React.Component {
           <small className='text-success mt-1 opacity-0' id='alert-copy'>Copied to clipboard</small>
         </div>
         <div className="AppUserContent__messages mt-4 w-50 text-white">
-          <h6>Received Messages</h6>
+          <h6>Latest messages</h6>
           <hr />
           <div className="AppUserContent__messages__message border px-5 py-4 rounded-5 text-start mb-3">
             <div className="AppUserContent__messages__message__body">
