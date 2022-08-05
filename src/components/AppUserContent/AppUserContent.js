@@ -7,17 +7,8 @@ import {
   FaTrash
 } from 'react-icons/fa';
 
-import { useParams } from 'react-router';
-import { useLocation } from 'react-router-dom';
-
-
-
-function withParams(Component) {
-  return props => <Component {...props} params={useParams()}/>;
-}
 
 function URLText () {
-  const location = useLocation();
   return <>{window.location.host+'/user/'+localStorage.getItem('username')}</>;
 }
 
@@ -69,7 +60,7 @@ class AppUserContent extends React.Component {
         <div className="AppUserContent__messages mt-4 w-50 text-white">
           <h6>Latest messages</h6>
           <hr />
-          <div className="AppUserContent__messages__message border px-5 py-4 rounded-5 text-start mb-3">
+          <div className="AppUserContent__messages__message px-5 py-4 rounded-5 text-start mb-3">
             <div className="AppUserContent__messages__message__body">
               <h6>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure minima sint iusto eos labore maiores nemo doloremque, quibusdam vitae quam.
@@ -91,4 +82,4 @@ AppUserContent.propTypes = {};
 
 AppUserContent.defaultProps = {};
 
-export default withParams(AppUserContent);
+export default AppUserContent;

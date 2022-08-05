@@ -8,6 +8,7 @@ import AppRegister from './Pages/AppRegister';
 import AppLogin from './Pages/AppLogin';
 import AppPasswordReset from './Pages/AppPasswordReset';
 import AppUser from './Pages/AppUser';
+import AppSendMessage from './Pages/AppSendMessage';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/login" element={<AppLogin></AppLogin>}></Route>
           <Route path="/password_reset" element={<AppPasswordReset></AppPasswordReset>}></Route>
           <Route path="/inbox" element={<AppUser></AppUser>}></Route>
-          <Route path="/user/:username" element={<AppUser></AppUser>}></Route>
+          <Route path="/user/:username" element={<AppSendMessage></AppSendMessage>}></Route>
           <Route path="*" element={
            <AppErrorMessage></AppErrorMessage>
           }></Route>
