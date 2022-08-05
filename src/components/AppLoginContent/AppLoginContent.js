@@ -8,7 +8,7 @@ class AppLoginContent extends React.Component {
     this.state = {
       //hardcoded for now
       username: 'rics',
-      password: 'rics',
+      password: '123',
       isLoggin: false,
       error: '',
       loading: false,
