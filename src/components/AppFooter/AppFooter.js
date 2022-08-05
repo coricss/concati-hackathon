@@ -50,8 +50,7 @@ class AppFooter extends React.Component {
             <div className="col-4">
               <a className="brand text-decoration-none d-flex justify-content-center" href="/">
                 <div className='d-flex align-items-center'>
-                  <img src={ logo } alt="Keep logo" width='70px' />
-                  <h1 className='fw-bold text-danger ms-2 m-0'>TellMe</h1>
+                  <img src={ logo } alt="Keep logo" width='100px' />
                 </div>
               </a>
             </div>

@@ -7,8 +7,14 @@
   align-items: center
 }
 
-.AppUserContent__header {
-  /* text-transform: uppercase; */
+.AppUserContent__messages {
+  height: 500px;
+  overflow-x: auto;
+}
+
+.AppUserContent__messages__message {
+  border: #333333 1px solid;
+  background-color: #1d1d1d;
 }
 
 .AppUserContent__header h1 {
@@ -23,6 +29,6 @@
   width: 100%;
 }
 .user-link-container {
-  width: 350px;
+  width: 320px;
   background-color: #1d1d1d;
 }
