@@ -9,6 +9,9 @@ class AppHomeContent extends React.Component {
   onClickRegister = () => {
     window.location.href = '/register';
   }
+  viewMessages = () => {
+    window.location.href = '/inbox';
+  }
   render(){
     return(
       <div className="AppHomeContent" data-testid="AppHomeContent">
@@ -21,11 +24,20 @@ class AppHomeContent extends React.Component {
               <div className='AppSubtitle mb-5 text-lg-start text-center'>
                 <p className='fs-5'>Make your link below and get their messages anonymously!</p>
               </div>
-              <div className='AppMainButton w-100 text-lg-start text-center'>
-                <button className='btn btn-outline-danger btn-get-link btn-lg p-3 px-4 rounded-5' onClick={this.onClickRegister}>
-                  Create your link
-                </button>
-              </div>
+              {
+                localStorage.getItem('isLogin') == 'true'
+                ? <div className='AppMainButton w-100 text-lg-start text-center'>
+                    <button className='btn btn-outline-danger btn-get-link btn-lg p-3 px-4 rounded-5' onClick={this.viewMessages}>
+                      View messages
+                    </button>
+                  </div>
+                : <div className='AppMainButton w-100 text-lg-start text-center'>
+                    <button className='btn btn-outline-danger btn-get-link btn-lg p-3 px-4 rounded-5' onClick={this.onClickRegister}>
+                      Create your link
+                    </button>
+                  </div>
+              }
+              
             </div>
             <div className="col-lg-5 col-md-12">
               <div className="AppHomeImage">

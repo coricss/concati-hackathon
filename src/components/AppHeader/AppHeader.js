@@ -5,6 +5,13 @@ import './AppHeader.css';
 import logo from '../../images/TellMe-logo.png';
 class AppHeader extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      loading: false,
+    };
+  }
+
   onClickRegister = () => {
     window.location.href = '/register';
   }
@@ -13,9 +20,17 @@ class AppHeader extends React.Component {
   }
 
   logOut = () => {
-    localStorage.setItem('isLogin', false);
     localStorage.removeItem('username');
-    window.location.href = '/login';
+    this.setState({
+      loading: true
+    });
+    setTimeout (() => {
+      this.setState({
+        loading: false
+      });
+      localStorage.setItem('isLogin', false);
+      window.location.href = '/login';
+    }, 2000);
   }
 
   render(){
@@ -33,7 +48,11 @@ class AppHeader extends React.Component {
               {
                 localStorage.getItem('isLogin') == 'true' 
                 ? <div className="d-flex align-items-center gap-2">
-                    <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.logOut}>Logout</button>
+                    {
+                      this.state.loading == true
+                      ? <div className='spinner-border spinner-border-sm text-white' role='status'></div>
+                      : <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.logOut}>Logout</button>
+                    }
                   </div>
                 : 
                   <div className="d-flex align-items-center gap-2">
