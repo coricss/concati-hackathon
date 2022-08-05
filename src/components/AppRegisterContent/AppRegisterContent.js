@@ -51,7 +51,7 @@ class AppRegisterContent extends React.Component {
       }, 2000);
     }else {
       setTimeout(() => {
-        const MySwal = withReactContent(Swal)
+          const MySwal = withReactContent(Swal)
           MySwal.fire({
             title: 'Successfully registered!',
             icon: 'success',
