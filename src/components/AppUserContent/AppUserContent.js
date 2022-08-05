@@ -31,7 +31,12 @@ class AppMessages extends React.Component {
 }
 class AppUserContent extends React.Component {
 
+  //Data for messages
   messages = [
+    {
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
+      timeAgo: '12:00 am'
+    },
     {
       text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
       timeAgo: '12:00 am'
@@ -44,6 +49,9 @@ class AppUserContent extends React.Component {
 
   constructor (props) {
     super(props);
+    this.state = {
+      isLoading: true
+    }
   }
 
   componentDidMount = () => {
@@ -107,9 +115,11 @@ class AppUserContent extends React.Component {
           <hr />
         </div>
         <div className="AppUserContent__messages w-50 text-white p-2">
-         
-          {this.messagesArray}
-        
+         {
+           this.state.isLoading != false
+           ? <div className='spinner-border spinner-border-sm' role='status'></div>
+            : <>{this.messagesArray}</>
+         }
         </div>
       </div>
     )
