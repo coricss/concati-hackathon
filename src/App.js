@@ -18,6 +18,7 @@ function App() {
           <Route path="/register" element={<AppRegister></AppRegister>}></Route>
           <Route path="/login" element={<AppLogin></AppLogin>}></Route>
           <Route path="/password_reset" element={<AppPasswordReset></AppPasswordReset>}></Route>
+          <Route path="/inbox" element={<AppUser></AppUser>}></Route>
           <Route path="/user/:username" element={<AppUser></AppUser>}></Route>
           <Route path="*" element={
            <AppErrorMessage></AppErrorMessage>

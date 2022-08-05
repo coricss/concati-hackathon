@@ -6,6 +6,7 @@ class AppLoginContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //hardcoded for now
       username: 'rics',
       password: 'rics',
       isLoggin: false,
@@ -14,6 +15,7 @@ class AppLoginContent extends React.Component {
     };
   }
 
+//LOGIN FUNCTION
   handleLogin = (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -23,6 +25,8 @@ class AppLoginContent extends React.Component {
     //   password: password
     // }
     // this.props.login(data);
+
+    //set loadng to true
     this.setState({
       loading: true
     });
@@ -32,14 +36,18 @@ class AppLoginContent extends React.Component {
       });
     }, 2000);
    
+    //login verification
     if( username == this.state.username && password == this.state.password ){
       setTimeout(() => {
         this.setState({
           isLoggin: true
         });
-        window.location.href = '/user/' + username;
+        //set username to localstorage for now
+        localStorage.setItem('username', username);
+        window.location.href = '/inbox';
       }, 2000);
     }else {
+      //alert error when invalid login
       setTimeout(() => {
         this.setState({
           error: 'Invalid username or password'
@@ -72,7 +80,6 @@ class AppLoginContent extends React.Component {
                 </div>
                 : null
               }
-             
               <div className="form-group mb-3 login-inputs">
                 <input type="text" className="form-control" id="username" placeholder="Username" name="username" required />
               </div>

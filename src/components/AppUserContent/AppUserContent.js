@@ -18,7 +18,7 @@ function withParams(Component) {
 
 function URLText () {
   const location = useLocation();
-  return <>{window.location.host+location.pathname}</>;
+  return <>{window.location.host+/user/+localStorage.getItem('username')}</>;
 }
 
 class AppUserContent extends React.Component {
@@ -46,7 +46,7 @@ class AppUserContent extends React.Component {
     return(
       <div className="AppUserContent" data-testid="AppUserContent">
         <div className="AppUserContent__header text-danger">
-          <h1>Hello {this.props.params.username}!</h1>
+          <h1>Hello {localStorage.getItem('username')}!</h1>
         </div>
         <small className='text-white mb-2'>You can receive messages from other people by clicking on the link below.</small>
         <div className="AppUserContent__link">
