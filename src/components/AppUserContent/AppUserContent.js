@@ -100,13 +100,13 @@ class AppUserContent extends React.Component {
         </div>
         <small className='text-white mb-2'>Click your link below and share to receive messages from other people.</small>
         <div className="AppUserContent__link">
-          <button onClick={this.handleCopyText} id="btn-link" className="user-link-container text-white border border-danger border-2 rounded-5 d-flex align-items-center justify-content-start p-3">
-            <div className="user-link-icon text-danger me-2 p-1" id='link-icon'>
-              <FaCopy size={20}></FaCopy>
-            </div>
+          <button onClick={this.handleCopyText} id="btn-link" className="user-link-container text-white border border-danger border-2 rounded-5 d-flex align-items-center justify-content-between p-3">
             <p className='m-0' id="copy-text">
               <URLText></URLText>
             </p>
+            <div className="user-link-icon text-danger p-1" id='link-icon'>
+              <FaCopy size={20}></FaCopy>
+            </div>
           </button>
           <small className='text-success mt-1 opacity-0' id='alert-copy'>Copied to clipboard</small>
         </div>
