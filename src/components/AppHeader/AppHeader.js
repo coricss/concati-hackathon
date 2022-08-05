@@ -11,6 +11,13 @@ class AppHeader extends React.Component {
   onClickLogin = () => {
     window.location.href = '/login';
   }
+
+  logOut = () => {
+    localStorage.setItem('isLogin', false);
+    localStorage.removeItem('username');
+    window.location.href = '/login';
+  }
+
   render(){
     return(
       <div className='AppHeader'data-testid="AppHeader">
@@ -23,10 +30,19 @@ class AppHeader extends React.Component {
                   <h1 className='fw-bold text-danger ms-2 m-0'>TellMe</h1>
                 </div>
               </a>
-              <div className="d-flex align-items-center gap-2">
-                <button className='btn btn-primary btn-login fw-bold' onClick={this.onClickLogin}>Login</button>
-                <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.onClickRegister}>Get started</button>
-              </div>
+              {
+                localStorage.getItem('isLogin') == 'true' 
+                ? <div className="d-flex align-items-center gap-2">
+                    <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.logOut}>Logout</button>
+                  </div>
+                : 
+                  <div className="d-flex align-items-center gap-2">
+                    <button className='btn btn-primary btn-login fw-bold' onClick={this.onClickLogin}>Login</button>
+                    <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.onClickRegister}>Get started</button>
+                  </div>
+              }
+              
+             
             </div>
             
           </div>
