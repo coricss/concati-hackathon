@@ -7,13 +7,46 @@ import logo from '../../images/TellMe-logo.png';
 import {
   Modal
 } from 'react-bootstrap';
+
+import {
+  FaStar
+} from 'react-icons/fa';
+
+import { useState } from "react";
+
+const StarRating = () => {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  localStorage.setItem("rating", rating);
+  return (
+    <div className="star-rating">
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        return (
+          <button
+            type="button"
+            key={index}
+            className={index <= (hover || rating) ? "on" : "off"}
+            onClick={() => setRating(index)}
+            onMouseEnter={() => setHover(index)}
+            onMouseLeave={() => setHover(rating)}
+          >
+            <FaStar className='star mx-3' size={30}></FaStar>
+
+          </button>
+        );
+      })}
+    </div>
+  );
+};
 class AppHeader extends React.Component {
 
   constructor (props) {
     super(props);
     this.state = {
       loading: false,
-      showModal: false
+      showModal: false,
+      rating: localStorage.getItem('rating')
     };
   }
 
@@ -50,6 +83,25 @@ class AppHeader extends React.Component {
     });
   }
 
+  submitFeedback = (e) => {
+    e.preventDefault();
+    // const data = new FormData(e.target);
+    // const rate = data.get('rate');
+    console.log(e.target.rate.value);
+    // const username = localStorage.getItem('username');
+    // const url = 'http://localhost:5000/api/feedback';
+    // const options = {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: username,
+    //     rate: rate
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // };
+    // fetch(url, options)
+  }
   render(){
     return(
       <div className='AppHeader'data-testid="AppHeader">
@@ -90,15 +142,21 @@ class AppHeader extends React.Component {
               size="lg"
               className="modal-feedback"
             >
-              <Modal.Header className='justify-content-center'>
-                <Modal.Title>SURVEY QUESTION</Modal.Title>
+              <Modal.Header 
+                className='justify-content-center' 
+                closeButton={true}
+                
+              >
+                <Modal.Title>How was your experience using this app?</Modal.Title>
               </Modal.Header>
-              <Modal.Body className='text-center'>
-                <p>Modal body text goes here.</p>
+              <Modal.Body className='text-center d-flex flex-column justify-content-center'>
+                <StarRating></StarRating>
               </Modal.Body>
               <Modal.Footer className='justify-content-center'>
-                <button className='btn btn-primary'>Submit</button>
-                <button className='btn btn-secondary' onClick={this.onHide}>Close</button>
+                <form onSubmit={this.submitFeedback}>
+                  <input value={this.state.rating} name='rate' type='hidden'/>
+                  <button className='btn btn-danger btn-lg'>Submit</button>
+                </form>
               </Modal.Footer>
             </Modal>
           </div>
