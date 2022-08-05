@@ -33,10 +33,12 @@ class AppLoginContent extends React.Component {
     }, 2000);
    
     if( username == this.state.username && password == this.state.password ){
-      this.setState({
-        isLoggin: true
-      });
-      window.location.href = '/user/' + username;
+      setTimeout(() => {
+        this.setState({
+          isLoggin: true
+        });
+        window.location.href = '/user/' + username;
+      }, 2000);
     }else {
       setTimeout(() => {
         this.setState({
