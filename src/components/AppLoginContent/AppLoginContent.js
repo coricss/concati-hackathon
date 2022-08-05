@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './AppLoginContent.css';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 class AppLoginContent extends React.Component {
   constructor(props) {
     super(props);
@@ -46,14 +48,35 @@ class AppLoginContent extends React.Component {
         localStorage.setItem('isLogin', true);
         var username = email.split('@')[0];
         localStorage.setItem('username', username);
-        window.location.href = '/inbox';
+
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Successfully logged in!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          closeButtonAriaLabel: 'Close',
+        }).then(() => {
+          window.location.href = '/inbox';
+        })
       }, 2000);
     }else {
       //alert error when invalid login
       setTimeout(() => {
-        this.setState({
-          error: 'Invalid email or password'
-        });
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Invalid email or password',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          closeButtonAriaLabel: 'Close',
+        })
       }, 2000);
     }
   }
@@ -74,14 +97,8 @@ class AppLoginContent extends React.Component {
             </div>
             <hr className='text-white'></hr>
             <center className='mt-4'>
-              {
-                this.state.error ? 
-                <div class="alert alert-success alert-dismissible fade show w-100 mx-0" role="alert">
-                  <small>{this.state.error}</small>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
-                </div>
-                : null
-              }
+              <div className='w-75'>
+              </div>
               <div className="form-group mb-3 login-inputs">
                 <input type="email" className="form-control" id="email" placeholder="Email" name="email" required />
               </div>
