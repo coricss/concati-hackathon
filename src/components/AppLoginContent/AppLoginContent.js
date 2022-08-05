@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './AppLoginContent.css';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 class AppLoginContent extends React.Component {
   constructor(props) {
@@ -36,40 +37,39 @@ class AppLoginContent extends React.Component {
         loading: false
       });
     }, 2000);
-
-    let data = {
-      email:email,
-      password:password
-    }
-    console.log(data);
-    axios.post('http://localhost:8000/login.php',data)
+  
+    axios.post('http://localhost:8000/login.php?email='+email+'&password='+password)
       .then(res=>{
-        console.log(res);
+        console.log(res.data.code);
+
+
+        if(res.data.code==200){
+          console.log('success');
+          setTimeout(() => {
+            this.setState({
+              isLogin: true
+            });
+            //set email and login status to localstorage for now
+            localStorage.setItem('isLogin', true);
+            var username = email.split('@')[0];
+            localStorage.setItem('username', username);
+            window.location.href = '/inbox';
+          }, 2000);
+        }else {
+          //alert error when invalid login
+          setTimeout(() => {
+            this.setState({
+              error: res.data.message
+            });
+          }, 2000);
+        }
       })
       .catch(err=>{
         console.log(err);
       })
    
-    //login verification
-    if( email == this.state.email && password == this.state.password ){
-      setTimeout(() => {
-        this.setState({
-          isLogin: true
-        });
-        //set email and login status to localstorage for now
-        localStorage.setItem('isLogin', true);
-        var username = email.split('@')[0];
-        localStorage.setItem('username', username);
-        window.location.href = '/inbox';
-      }, 2000);
-    }else {
-      //alert error when invalid login
-      setTimeout(() => {
-        this.setState({
-          error: 'Invalid email or password'
-        });
-      }, 2000);
-    }
+    
+    
   }
 
   // getMessage(){
@@ -109,7 +109,7 @@ class AppLoginContent extends React.Component {
       <div className="AppLoginContent" data-testid="AppLoginContent">
         <div className='login-form-container'>
           {/* <form action='http://localhost:8000/login.php' method='POST'> */}
-          <form onSubmit={this.handleLogin}>
+          <form onSubmit={this.handleLogin} method='POST'>
             <div className="form-group text-uppercase">
               <h1 className='text-danger'>Login</h1>
             </div>

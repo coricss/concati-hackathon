@@ -14,23 +14,18 @@ class AppRegisterContent extends React.Component {
               </div>
               <hr className='text-white'></hr>
               <center className='mt-4'>
-<<<<<<< HEAD
                 {/* <div className="form-group mb-3 register-inputs">
                   <input type="text" className="form-control" id="username" name="username"placeholder="Username" required />
                 </div> */}
                 <div className="form-group mb-3 register-inputs">
                   <input type="email" className="form-control" id="email" placeholder="Email" name="email"required />
                 </div>
-=======
                 
->>>>>>> e81396f4df70b789819428e65beb030290e51de1
                 <div className="form-group mb-3 register-inputs">
                   <input type="password" className="form-control" id="pwd" name="password" placeholder="Password" required />
                 </div>
                 <div className="form-group mb-3 register-inputs">
-<<<<<<< HEAD
                   <input type="password" className="form-control" id="pwd2" name="confirmPassword" placeholder="Confirm password" required />
-=======
                   <input type="text" pattern='(\+?\d{2}?\s?\d{3}\s?\d{3}\s?\d{4})|([0]\d{3}\s?\d{3}\s?\d{4})' maxLength={11} className="form-control" id="phone" placeholder="09XXXXxxxxx" required />
                 </div>
                 <div className="form-group mb-3 register-inputs">
@@ -38,7 +33,6 @@ class AppRegisterContent extends React.Component {
                 </div>
                 <div className="form-group mb-3 register-inputs">
                   <input type="password" className="form-control" id="pwd2" placeholder="Confirm password" required />
->>>>>>> e81396f4df70b789819428e65beb030290e51de1
                 </div>
                 <div className="mb-3 text-white">
                   <input type="checkbox" className="form-check-input me-2 checkbox" id="checkbox" placeholder="Confirm password" />
