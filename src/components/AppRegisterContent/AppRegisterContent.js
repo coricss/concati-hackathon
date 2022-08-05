@@ -92,8 +92,8 @@ class AppRegisterContent extends React.Component {
                   <input type="password" className="form-control" id="pwd2" placeholder="Confirm password" name="confirm_pass"  required />
                 </div>
                 <div className="mb-3 text-white">
-                  <input type="checkbox" className="form-check-input me-2 checkbox" id="checkbox" placeholder="Confirm password" />
-                  <label htmlFor='checkbox'>I am over 18 years old</label>
+                  <input type="checkbox" className="form-check-input me-2 checkbox" id="checkbox" required />
+                  <label className="form-check-label" htmlFor="checkbox">I agree to the <a href="#" className="text-white">terms and conditions</a></label>
                 </div>
                 <div className="form-group w-100 mb-3">
                   <button className='btn btn-danger btn-lg w-100 rounded-5' >
