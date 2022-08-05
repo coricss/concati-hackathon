@@ -8,9 +8,6 @@ class AppLoginContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //hardcoded for now
-      email: 'rics@gmail.com',
-      password: '123',
       isLogin: false,
       error: '',
       loading: false,
@@ -39,7 +36,7 @@ class AppLoginContent extends React.Component {
     }, 2000);
    
     //login verification
-    if( email == this.state.email && password == this.state.password ){
+    if( email == localStorage.getItem('email') && password == localStorage.getItem('password') ){
       setTimeout(() => {
         this.setState({
           isLogin: true
