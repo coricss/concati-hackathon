@@ -94,7 +94,6 @@ class AppSendMessageContent extends React.Component {
       </div>
     )
   }
-  
 };
 
 AppSendMessageContent.propTypes = {};

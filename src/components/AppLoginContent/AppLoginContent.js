@@ -7,7 +7,7 @@ class AppLoginContent extends React.Component {
     super(props);
     this.state = {
       //hardcoded for now
-      username: 'rics',
+      email: 'rics@gmail.com',
       password: '123',
       isLogin: false,
       error: '',
@@ -18,10 +18,10 @@ class AppLoginContent extends React.Component {
 //LOGIN FUNCTION
   handleLogin = (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
+    const email = e.target.email.value;
     const password = e.target.password.value;
     // const data = {
-    //   username: username,
+    //   email: email,
     //   password: password
     // }
     // this.props.login(data);
@@ -37,13 +37,14 @@ class AppLoginContent extends React.Component {
     }, 2000);
    
     //login verification
-    if( username == this.state.username && password == this.state.password ){
+    if( email == this.state.email && password == this.state.password ){
       setTimeout(() => {
         this.setState({
           isLogin: true
         });
-        //set username and login status to localstorage for now
+        //set email and login status to localstorage for now
         localStorage.setItem('isLogin', true);
+        var username = email.split('@')[0];
         localStorage.setItem('username', username);
         window.location.href = '/inbox';
       }, 2000);
@@ -51,7 +52,7 @@ class AppLoginContent extends React.Component {
       //alert error when invalid login
       setTimeout(() => {
         this.setState({
-          error: 'Invalid username or password'
+          error: 'Invalid email or password'
         });
       }, 2000);
     }
@@ -82,7 +83,7 @@ class AppLoginContent extends React.Component {
                 : null
               }
               <div className="form-group mb-3 login-inputs">
-                <input type="text" className="form-control" id="username" placeholder="Username" name="username" required />
+                <input type="email" className="form-control" id="email" placeholder="Email" name="email" required />
               </div>
               <div className="form-group mb-3 login-inputs">
                 <input type="password" className="form-control" id="pwd" placeholder="Password" name="password" required />
