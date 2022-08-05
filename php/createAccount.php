@@ -2,30 +2,15 @@
 require("concati.php");
 
 
-if(isset($_POST['createAccount'])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
+    $email = $_GET['email'];
+    $password = $_GET['password'];
+    $mobile = $_GET['mobile'];
+    // $confirmPassword = $_GET['confirmPassword'];
 
-
-
-    if($password===$confirmPassword){
-
-
-    $data =json_encode(array("email"=> $email,"password"=>$password));
+    $data =json_encode(array("email"=> $email,"password"=>$password,"mobile"=>$mobile));
     $class = new concati();
-    $account = $class->createAccount($data);
+    $res = $class->createAccount($data);
 
-        if($account['code']==200){
-            echo "<script>alert('".$account['message']."')</script>";
-            echo "<script>window.location.href = 'http://localhost:3000/register'</script>";
-        }
-        else{
-            echo $account['message'] ;
-        }
-    }
-    else{
-        echo "<script>alert('Password Do Not Match')</script>";
-    }
+    echo json_encode($res);
+       
     
-}

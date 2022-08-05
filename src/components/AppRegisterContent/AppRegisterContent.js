@@ -1,19 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AppRegisterContent.css';
+import axios from 'axios';
+
  
 class AppRegisterContent extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: '',
+    };
+  }
+
+
+  handleRegister=(e)=>{
+    e.preventDefault();
+    let email = e.target.email.value;
+    let password = e.target.pwd.value;
+    let password2 = e.target.pwd2.value;
+    let mobile = e.target.phone.value;
+
+    if(password !== password2){
+      setTimeout(() => {
+        this.setState({
+          error: 'Password do not match!'
+        });
+      }, 2000);
+    }
+    else{
+      axios.post('http://localhost:8000/createAccount.php?email='+email+'&password='+password+'&mobile='+mobile)
+      .then(res=>{
+        console.log(res);
+
+        setTimeout(() => {
+          this.setState({
+            error: res.data.message
+          });
+        }, 2000);
+        
+      })
+    }
+
+
+  }
+
+
   render(){
     return(
       <div className="AppRegisterContent" data-testid="AppRegisterContent">
         <div className="">
           <div className='register-form-container'>
-            <form action='http://localhost:8000/createAccount.php' method='POST'>
+            <form onSubmit={this.handleRegister}>
               <div className="form-group text-uppercase">
                 <h1 className='text-danger'>Register</h1>
               </div>
               <hr className='text-white'></hr>
               <center className='mt-4'>
+              {
+                this.state.error ? 
+                <div class="alert alert-success alert-dismissible fade show w-100 mx-0" role="alert">
+                  <small>{this.state.error}</small>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
+                </div>
+                : null
+              }
                 {/* <div className="form-group mb-3 register-inputs">
                   <input type="text" className="form-control" id="username" name="username"placeholder="Username" required />
                 </div> */}
@@ -22,17 +73,13 @@ class AppRegisterContent extends React.Component {
                 </div>
                 
                 <div className="form-group mb-3 register-inputs">
-                  <input type="password" className="form-control" id="pwd" name="password" placeholder="Password" required />
+                  <input type="text" pattern='(\+?\d{2}?\s?\d{3}\s?\d{3}\s?\d{4})|([0]\d{3}\s?\d{3}\s?\d{4})' maxLength={11} className="form-control" id="phone" name='phone'placeholder="09XXXXxxxxx" required />
                 </div>
                 <div className="form-group mb-3 register-inputs">
-                  <input type="password" className="form-control" id="pwd2" name="confirmPassword" placeholder="Confirm password" required />
-                  <input type="text" pattern='(\+?\d{2}?\s?\d{3}\s?\d{3}\s?\d{4})|([0]\d{3}\s?\d{3}\s?\d{4})' maxLength={11} className="form-control" id="phone" placeholder="09XXXXxxxxx" required />
+                  <input type="password" className="form-control" id="pwd" name='pwd'placeholder="Password" required />
                 </div>
                 <div className="form-group mb-3 register-inputs">
-                  <input type="password" className="form-control" id="pwd" placeholder="Password" required />
-                </div>
-                <div className="form-group mb-3 register-inputs">
-                  <input type="password" className="form-control" id="pwd2" placeholder="Confirm password" required />
+                  <input type="password" className="form-control" id="pwd2" name="pwd2"placeholder="Confirm password" required />
                 </div>
                 <div className="mb-3 text-white">
                   <input type="checkbox" className="form-check-input me-2 checkbox" id="checkbox" placeholder="Confirm password" />

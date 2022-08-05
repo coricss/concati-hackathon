@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './AppLoginContent.css';
 import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
 
 class AppLoginContent extends React.Component {
   constructor(props) {
