@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import './AppHeader.css';
 
 import logo from '../../images/TellMe-logo.png';
+
+import {
+  Modal
+} from 'react-bootstrap';
 class AppHeader extends React.Component {
 
   constructor (props) {
     super(props);
     this.state = {
       loading: false,
+      showModal: false
     };
   }
 
@@ -33,6 +38,18 @@ class AppHeader extends React.Component {
     }, 2000);
   }
 
+  onShow = () => {
+    this.setState({
+      showModal: true
+    });
+  }
+
+  onHide = () => {
+    this.setState({
+      showModal: false
+    });
+  }
+
   render(){
     return(
       <div className='AppHeader'data-testid="AppHeader">
@@ -51,7 +68,10 @@ class AppHeader extends React.Component {
                     {
                       this.state.loading == true
                       ? <div className='spinner-border spinner-border-sm text-white' role='status'></div>
-                      : <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.logOut}>Logout</button>
+                      : <>
+                          <button className='btn btn-primary btn-login fw-bold' onClick={this.onShow}>Send feedback</button>
+                          <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.logOut}>Logout</button>
+                        </>
                     }
                   </div>
                 : 
@@ -60,10 +80,27 @@ class AppHeader extends React.Component {
                     <button className='btn btn-outline-danger btn-sign-up fw-bold rounded-5' onClick={this.onClickRegister}>Get started</button>
                   </div>
               }
-              
-             
             </div>
-            
+            <Modal 
+              show={this.state.showModal} 
+              onHide={this.onHide} 
+              centered 
+              backdrop="true" 
+              keyboard={false}
+              size="lg"
+              className="modal-feedback"
+            >
+              <Modal.Header className='justify-content-center'>
+                <Modal.Title>SURVEY QUESTION</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className='text-center'>
+                <p>Modal body text goes here.</p>
+              </Modal.Body>
+              <Modal.Footer className='justify-content-center'>
+                <button className='btn btn-primary'>Submit</button>
+                <button className='btn btn-secondary' onClick={this.onHide}>Close</button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </nav>
       </div>

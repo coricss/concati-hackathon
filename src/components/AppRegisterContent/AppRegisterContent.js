@@ -14,11 +14,12 @@ class AppRegisterContent extends React.Component {
               </div>
               <hr className='text-white'></hr>
               <center className='mt-4'>
-                <div className="form-group mb-3 register-inputs">
-                  <input type="text" className="form-control" id="username" placeholder="Username" required />
-                </div>
+                
                 <div className="form-group mb-3 register-inputs">
                   <input type="email" className="form-control" id="email" placeholder="Email" required />
+                </div>
+                <div className="form-group mb-3 register-inputs">
+                  <input type="text" pattern='(\+?\d{2}?\s?\d{3}\s?\d{3}\s?\d{4})|([0]\d{3}\s?\d{3}\s?\d{4})' maxLength={11} className="form-control" id="phone" placeholder="09XXXXxxxxx" required />
                 </div>
                 <div className="form-group mb-3 register-inputs">
                   <input type="password" className="form-control" id="pwd" placeholder="Password" required />

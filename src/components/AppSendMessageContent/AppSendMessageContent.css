@@ -31,5 +31,5 @@
 }
 
 .AppSendMessageContent__messages__body__message textarea::placeholder {
-  color: #ffffff;
+  color: #9e9e9e !important;
 }
