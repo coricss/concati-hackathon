@@ -76,7 +76,7 @@ class AppSendMessageContent extends React.Component {
                 : null
               }
               <div className="AppSendMessageContent__messages__body__message">
-                <textarea className='w-100 rounded-5' maxLength={200} placeholder='Type your message here..' name="message" required></textarea>
+                <textarea className='w-100 rounded-5' maxLength={200} minLength={10} placeholder='Type your message here..' name="message" required></textarea>
               </div>
             </div>
             <div className="AppSendMessageContent__messages__footer">

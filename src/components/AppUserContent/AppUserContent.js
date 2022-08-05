@@ -12,9 +12,53 @@ function URLText () {
   return <>{window.location.host+'/user/'+localStorage.getItem('username')}</>;
 }
 
+class AppMessages extends React.Component {
+  render() {
+    return(
+      <div className="AppUserContent__messages__message px-5 py-4 rounded-5 text-start mb-3">
+        <div className="AppUserContent__messages__message__body">
+          <h6>
+            { this.props.message }
+          </h6>
+          <div className='d-flex justify-content-between align-items-center'>
+            <small className='text-muted me-3'>{ this.props.timeAgo }</small>
+            <FaTrash className='text-danger' style={{cursor: 'pointer'}}></FaTrash>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 class AppUserContent extends React.Component {
+
+  messages = [
+    {
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
+      timeAgo: '12:00 am'
+    },
+    {
+      text: 'Lorem asdasdasd',
+      timeAgo: '12:00 pm'
+    }
+  ];
+
   constructor (props) {
     super(props);
+  }
+
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({
+        isLoading: false
+      })
+    }, 2000);
+  }
+
+  sentMessages = () => {
+    this.messagesArray = this.messages.map((message) => 
+      <AppMessages message={message.text} timeAgo={message.timeAgo} />
+    );
+    return this.messagesArray;
   }
 
   userCheck = () => {
@@ -40,12 +84,13 @@ class AppUserContent extends React.Component {
 
   render(){
     this.userCheck();
+    this.sentMessages();
     return(
       <div className="AppUserContent" data-testid="AppUserContent">
         <div className="AppUserContent__header text-danger">
           <h1>Hello {localStorage.getItem('username')}!</h1>
         </div>
-        <small className='text-white mb-2'>You can receive messages from other people by clicking on the link below.</small>
+        <small className='text-white mb-2'>Click your link below and share to receive messages from other people.</small>
         <div className="AppUserContent__link">
           <button onClick={this.handleCopyText} id="btn-link" className="user-link-container text-white border border-danger border-2 rounded-5 d-flex align-items-center justify-content-start p-3">
             <div className="user-link-icon text-danger me-2 p-1" id='link-icon'>
@@ -57,20 +102,14 @@ class AppUserContent extends React.Component {
           </button>
           <small className='text-success mt-1 opacity-0' id='alert-copy'>Copied to clipboard</small>
         </div>
-        <div className="AppUserContent__messages mt-4 w-50 text-white">
+        <div className='w-50 text-white mt-4 '>
           <h6>Latest messages</h6>
           <hr />
-          <div className="AppUserContent__messages__message px-5 py-4 rounded-5 text-start mb-3">
-            <div className="AppUserContent__messages__message__body">
-              <h6>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure minima sint iusto eos labore maiores nemo doloremque, quibusdam vitae quam.
-              </h6>
-              <div className='d-flex justify-content-between align-items-center'>
-                <small className='text-muted me-3'>{new Date().toLocaleTimeString()}</small>
-                <FaTrash className='text-danger' style={{cursor: 'pointer'}}></FaTrash>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className="AppUserContent__messages w-50 text-white p-2">
+         
+          {this.messagesArray}
+        
         </div>
       </div>
     )
