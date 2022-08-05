@@ -55,7 +55,7 @@ class AppLoginContent extends React.Component {
           showConfirmButton: false,
           timer: 2000,
           timerProgressBar: true,
-          closeButtonAriaLabel: 'Close',
+           
         }).then(() => {
           window.location.href = '/inbox';
         })
@@ -72,16 +72,10 @@ class AppLoginContent extends React.Component {
           showConfirmButton: false,
           timer: 2000,
           timerProgressBar: true,
-          closeButtonAriaLabel: 'Close',
+           
         })
       }, 2000);
     }
-  }
-
-  resetAlert = () => {
-    this.setState({
-      error: ''
-    });
   }
 
   render(){

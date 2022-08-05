@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './AppPasswordResetContent.css';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 class AppPasswordResetContent extends React.Component {
   constructor(props) {
     super(props);
@@ -38,15 +40,22 @@ class AppPasswordResetContent extends React.Component {
     if(emailInput==this.state.email){
       setTimeout(() => {
         this.setState({
-          enteredEmail: true,
-          error: ''
+          enteredEmail: true
         })
       }, 2000);
     }else{
       setTimeout(() => {
-        this.setState({
-          error: 'Invalid email'
-        });
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Invalid email',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+ 
+        })
       }, 2000);
     }
   }
@@ -66,15 +75,22 @@ class AppPasswordResetContent extends React.Component {
     if(one_time_pass===this.state.oneTimePass){
       setTimeout(() => {
         this.setState({
-          sentOTP: true,
-          error: ''
+          sentOTP: true
         })
       }, 2000);
     }else {
       setTimeout(() => {
-        this.setState({
-          error: 'Invalid OTP'
-        });
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Invalid OTP',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+
+        })
       }, 2000);
     }
   }
@@ -91,8 +107,7 @@ class AppPasswordResetContent extends React.Component {
     const new_password = e.target.new_password.value;
     const confirm_password = e.target.confirm_password.value;
     this.setState({
-      loading: true,
-      error: ''
+      loading: true
     });
     setTimeout(() => {
       this.setState({
@@ -102,24 +117,38 @@ class AppPasswordResetContent extends React.Component {
     if(new_password===confirm_password){
       setTimeout(() => {
         this.setState({
-          isChangedPass: true,
-          error: ''
+          isChangedPass: true
         })
-        window.location.href = '/login';
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Password changed successfully',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+ 
+        }).then(() => {
+          localStorage.setItem('password', new_password);
+          window.location.href = '/login';
+        });
       }, 2000);
     }else {
       setTimeout(() => {
-        this.setState({
-          error: 'Password does not match'
-        });
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Password does not match',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+ 
+        })
       } , 2000);
     }
-  }
-
-  resetAlert = () => {
-    this.setState({
-      error: ''
-    });
   }
 
   render(){
@@ -133,24 +162,16 @@ class AppPasswordResetContent extends React.Component {
             </div>
             <hr className='text-white' style={{width: '500px'}}></hr>
             {
-              this.state.enteredEmail == false?
+              this.state.enteredEmail == true ?
               <>
                 {
-                  this.state.sentOTP == false ?
+                  this.state.sentOTP == true ?
                   <>
                     <p className='text-white'>
                     Finally, enter your new password below.
                     </p>
                     <form onSubmit={this.changePassword}>
                       <center className='mt-4'>
-                        {
-                          this.state.error ?
-                          <div class="alert alert-danger alert-dismissible fade show alert-reset-email mx-0" role="alert">
-                            <small>{this.state.error}</small>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
-                          </div>
-                          : null
-                        }
                         <div className="form-group mb-3 reset-pass-inputs">
                           <input type="password" className="new_password" id="new_password" placeholder="New password" name='new_password' required autoComplete='off'></input>
                         </div>
@@ -176,16 +197,8 @@ class AppPasswordResetContent extends React.Component {
                     </p>
                     <form onSubmit={this.sendOTP}>
                       <center className='mt-4'>
-                        {
-                          this.state.error ?
-                          <div class="alert alert-danger alert-dismissible fade show alert-reset-email mx-0" role="alert">
-                            <small>{this.state.error}</small>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
-                          </div>
-                          : null
-                        }
                         <div className="form-group mb-3 reset-pass-inputs">
-                          <input type="password" className="one-time-pass" id="one-time-pass" placeholder="* * * * *" name='one_time_pass'></input>
+                          <input type="password" className="one_time_pass" id="one_time_pass" placeholder="* * * * *" name='one_time_pass'></input>
                         </div>
                         <div className="form-group w-100">
                           <button className='btn btn-danger btn-lg btn-send-otp rounded-5'>
@@ -208,26 +221,16 @@ class AppPasswordResetContent extends React.Component {
                 </p>
                 <form onSubmit={this.emailSubmit}>
                   <center className='mt-4'>
-                    {
-                      this.state.error ?
-                      <div class="alert alert-danger alert-dismissible fade show alert-reset-email mx-0" role="alert">
-                        <small>{this.state.error}</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
-                      </div>
-                      : null
-                    }
-                   
-                      <div className="form-group mb-3 reset-pass-inputs">
-                        <input type="email" className="form-control" id="email" placeholder="Email" name='email' onChange={this.onChangeEmail} required/>
-                      </div>
-                      <div className="form-group w-100">
-                        <button className='btn btn-danger btn-lg btn-reset-pass rounded-5' disabled={this.state.isTypeEmail == false ? true : false}>
-                          {
-                            this.state.loading == true ? <div className='spinner-border spinner-border-sm' role='status'></div> : 'Done'
-                          }
-                        </button>
-                      </div>
-               
+                    <div className="form-group mb-3 reset-pass-inputs">
+                      <input type="email" className="form-control" id="email" placeholder="Email" name='email' onChange={this.onChangeEmail} required/>
+                    </div>
+                    <div className="form-group w-100">
+                      <button className='btn btn-danger btn-lg btn-reset-pass rounded-5' disabled={this.state.isTypeEmail == false ? true : false}>
+                        {
+                          this.state.loading == true ? <div className='spinner-border spinner-border-sm' role='status'></div> : 'Done'
+                        }
+                      </button>
+                    </div>
                   </center>
                 </form>
               </>
