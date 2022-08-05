@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AppLoginContent.css';
+import axios from 'axios';
 
 class AppLoginContent extends React.Component {
   constructor(props) {
@@ -35,6 +36,19 @@ class AppLoginContent extends React.Component {
         loading: false
       });
     }, 2000);
+
+    let data = {
+      email:username,
+      password:password
+    }
+    console.log(data);
+    axios.post('http://localhost:8000/login.php',data)
+      .then(res=>{
+        console.log(res);
+      })
+      .catch(err=>{
+        console.log(err);
+      })
    
     //login verification
     if( username == this.state.username && password == this.state.password ){
@@ -56,16 +70,43 @@ class AppLoginContent extends React.Component {
     }
   }
 
+  // getMessage(){
+  //   // e.preventDefault()
+  //   axios.get('http://localhost:8000/login.php')
+  //   .then(res=>{
+  //     console.log(res);
+  //   })
+  //   .catch(err=>{
+  //     console.log(err);
+  //   })
+  // }
+
   resetAlert = () => {
     this.setState({
       error: ''
     });
   }
 
+  // getPHP(){
+  //   fetch(`http://localhost:8000/login.php`,{
+  //     method:'POST',
+  //     headers:{
+  //       Accept:'application/json',
+  //       'Content-Type':'application/json'
+  //     },
+  //     body:JSON.stringify
+  //   }).then(res=> res.json())
+  //   .then(response=>{
+  //     console.log('response');
+  //     console.log(response);
+  //   })
+  // }
+
   render(){
     return (
       <div className="AppLoginContent" data-testid="AppLoginContent">
         <div className='login-form-container'>
+          {/* <form action='http://localhost:8000/login.php' method='POST'> */}
           <form onSubmit={this.handleLogin}>
             <div className="form-group text-uppercase">
               <h1 className='text-danger'>Login</h1>
@@ -87,7 +128,7 @@ class AppLoginContent extends React.Component {
                 <input type="password" className="form-control" id="pwd" placeholder="Password" name="password" required />
               </div>
               <div className="form-group w-100">
-                <button className='btn btn-danger btn-lg w-100 rounded-5'>
+                <button className='btn btn-danger btn-lg w-100 rounded-5' name ="login">
                   {
                     this.state.loading == true ? <div className='spinner-border spinner-border-sm' role='status'></div> : 'Login'
                   }

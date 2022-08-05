@@ -32,7 +32,7 @@ class AppPasswordResetContent extends React.Component {
     <div className="AppPasswordResetContent" data-testid="AppPasswordResetContent">
       <div className="container">
         <div className='reset-pass-form-container'>
-          <form>
+          <form action="http://localhost:8000/resetPassword.php" method='POST'>
             <div className="form-group text-uppercase">
               <h1 className='text-danger'>Reset your password</h1>
             </div>
@@ -54,10 +54,10 @@ class AppPasswordResetContent extends React.Component {
                 </p>
                 <center className='mt-4'>
                   <div className="form-group mb-3 reset-pass-inputs">
-                    <input type="email" className="form-control" id="email" placeholder="Email" onChange={this.onChangeEmail} required/>
+                    <input type="email" className="form-control" id="email" name="email" placeholder="Email" onChange={this.onChangeEmail} required/>
                   </div>
                   <div className="form-group w-100">
-                    <button className='btn btn-danger btn-lg w-75 rounded-5' onClick={this.submitEmail} disabled={this.state.isTypeEmail == false ? true : false}>Done</button>
+                    <button className='btn btn-danger btn-lg w-75 rounded-5' name="resetPassword" disabled={this.state.isTypeEmail == false ? true : false}>Done</button>
                   </div>
                 </center>
               </>
