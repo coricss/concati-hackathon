@@ -7,6 +7,7 @@ import {
   FaTrash
 } from 'react-icons/fa';
 
+import nomessages from '../../images/no-messages.png';
 
 function URLText () {
   return <>{window.location.host+'/user/'+localStorage.getItem('username')}</>;
@@ -73,7 +74,12 @@ class AppUserContent extends React.Component {
       <AppMessages message={message.text} timeAgo={message.timeAgo} />
     );
     if( this.messages.length === 0 ){
-      return <p className='text-danger fs-5'>No messages yet</p>
+      return <>
+          <p className='text-danger fs-5'>No messages yet</p> 
+          <div>
+            <img className='img-fluid' src={nomessages} alt='no-messages' width="350px"/>
+          </div>
+        </>
     }else{
       return this.messagesArray;
     }
