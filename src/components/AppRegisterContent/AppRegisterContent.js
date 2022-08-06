@@ -47,21 +47,49 @@ class AppRegisterContent extends React.Component {
           // this.setState({
           //   error: res.data.message
           // });
-          const error = res.data.message;
-          const MySwal = withReactContent(Swal)
-          MySwal.fire({
-            title: error,
-            icon: 'info',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-          }).then(()=>{
-            if(res.data.code==200){
+          // const error = res.data.message;
+          // const MySwal = withReactContent(Swal)
+          // MySwal.fire({
+          //   title: error,
+          //   icon: 'info',
+          //   toast: true,
+          //   position: 'top',
+          //   showConfirmButton: false,
+          //   timer: 2000,
+          //   timerProgressBar: true,
+          // }).then(()=>{
+          //   if(res.data.code==200){
+          //     window.location.href = '/login';
+          //   }
+          // });
+
+          if(res.data.code==200){
+            const error = res.data.message;
+            const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: error,
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            }).then(()=>{
               window.location.href = '/login';
-            }
-          });
+            });
+          }else {
+            const error = res.data.message;
+            const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: error,
+              icon: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
         }, 2000);
         
       })
