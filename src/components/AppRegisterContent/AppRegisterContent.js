@@ -14,6 +14,26 @@ class AppRegisterContent extends React.Component {
     };
   }
 
+  viewPolicy =(e)=>{
+    console.log('asdasd');
+    axios.get('http://localhost:8000/getPolicy.php')
+    .then(res=>{
+        console.log(res.data);
+
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title:res.data,
+          width:600,
+          icon: 'info',
+          toast: false,
+          position: 'top',
+          showConfirmButton: true,
+          timerProgressBar: true,
+        })
+    })
+  }
+
+
   handleRegister=(e)=>{
     e.preventDefault();
     let email = e.target.email.value;
@@ -123,7 +143,7 @@ class AppRegisterContent extends React.Component {
                 </div>
                 <div className="mb-3 text-white">
                   <input type="checkbox" className="form-check-input me-2 checkbox" id="checkbox" required />
-                  <label className="form-check-label" htmlFor="checkbox">I agree to the <a href="#" className="text-white">terms and conditions</a></label>
+                  <label className="form-check-label" htmlFor="checkbox">I agree to the <a href="#" onClick={this.viewPolicy} className="text-white">terms and conditions</a></label>
                 </div>
                 <div className="form-group w-100 mb-3">
                   <button className='btn btn-danger btn-lg w-100 rounded-5' >

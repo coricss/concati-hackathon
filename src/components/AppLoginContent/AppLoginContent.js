@@ -148,6 +148,14 @@ class AppLoginContent extends React.Component {
             </div>
             <hr className='text-white'></hr>
             <center className='mt-4'>
+              {
+                this.state.error ? 
+                <div class="alert alert-danger alert-dismissible fade show w-100 mx-0" role="alert">
+                  <small>{this.state.error}</small>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
+                </div>
+                : null
+              }
               <div className='w-75'>
               </div>
               <div className="form-group mb-3 login-inputs">

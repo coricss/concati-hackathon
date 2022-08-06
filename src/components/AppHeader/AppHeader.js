@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AppHeader.css';
+import axios from 'axios';
+
 
 import logo from '../../images/TellMe-logo.png';
 
@@ -13,6 +15,10 @@ import {
 } from 'react-icons/fa';
 
 import { useState } from "react";
+
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const AppHeader = () => {
 
@@ -85,9 +91,43 @@ const AppHeader = () => {
 
   const submitFeedback = (e) => {
     e.preventDefault();
+
+    const rate = e.target.rate.value;
+
+    axios.post('http://localhost:8000/setRate.php?rate='+rate)
+    .then(res=>{
+      console.log(res);
+
+      if(res.data.code==200){
+        const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: res.data.message,
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              
+            }).then(() => {
+              window.location.href = '/inbox';
+            })
+      }else{
+        const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: res.data.message,
+              icon: 'warning',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            })
+      }
+    })
     // const data = new FormData(e.target);
     // const rate = data.get('rate');
-    alert(e.target.rate.value);
+    // alert(e.target.rate.value);
     // const username = localStorage.getItem('username');
     // const url = 'http://localhost:5000/api/feedback';
     // const options = {
