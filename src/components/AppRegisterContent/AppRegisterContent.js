@@ -14,6 +14,12 @@ class AppRegisterContent extends React.Component {
     };
   }
 
+  logInCheck = () => {
+    if(localStorage.getItem('isLogin') == 'true'){
+      window.location.href = '/inbox';
+    }
+  }
+
   viewPolicy =(e)=>{
     console.log('asdasd');
     axios.get('http://localhost:8000/getPolicy.php')
@@ -121,6 +127,7 @@ class AppRegisterContent extends React.Component {
   render(){
     return(
       <div className="AppRegisterContent" data-testid="AppRegisterContent">
+        {this.logInCheck()}
         <div className="">
           <div className='register-form-container'>
             <div className="form-group text-uppercase">
