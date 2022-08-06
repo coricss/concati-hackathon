@@ -1,46 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AppRegisterContent.css';
- 
+import axios from 'axios';
+
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 class AppRegisterContent extends React.Component {
-  constructor (props) {
+
+  constructor(props) {
     super(props);
     this.state = {
-      loading: false
-    }
+      error: '',
+    };
   }
-  //REGISTER FUNCTION
-  handleRegister = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const phone = e.target.phone.value;
-    const password = e.target.password.value;
-    const confirm_pass= e.target.confirm_pass.value;
-    // const data = {
-    //   email: email,
-    //   phone: phone,
-    //   password: password,
-    //   username: username
-    // }
-    // this.props.register(data);
-    //set loadng to true
-    this.setState({
-      loading: true
-    });
-    setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 2000);
 
-    //password verification
-    if( password != confirm_pass ){
+  handleRegister=(e)=>{
+    e.preventDefault();
+    let email = e.target.email.value;
+    let password = e.target.pwd.value;
+    let password2 = e.target.pwd2.value;
+    let mobile = e.target.phone.value;
+
+    if(password !== password2){
       setTimeout(() => {
-      const MySwal = withReactContent(Swal)
+        // this.setState({
+        //   error: 'Password do not match!'
+        // });
+        const MySwal = withReactContent(Swal)
         MySwal.fire({
-          title: 'Password does not match!',
+          title: 'Password do not match!',
           icon: 'error',
           toast: true,
           position: 'top',
@@ -49,25 +37,39 @@ class AppRegisterContent extends React.Component {
           timerProgressBar: true,
         })
       }, 2000);
-    }else {
-      setTimeout(() => {
+    }
+    else{
+      axios.post('http://localhost:8000/createAccount.php?email='+email+'&password='+password+'&mobile='+mobile)
+      .then(res=>{
+        console.log(res);
+
+        setTimeout(() => {
+          // this.setState({
+          //   error: res.data.message
+          // });
+          const error = res.data.message;
           const MySwal = withReactContent(Swal)
           MySwal.fire({
-            title: 'Successfully registered!',
-            icon: 'success',
+            title: error,
+            icon: 'info',
             toast: true,
             position: 'top',
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true,
-          }).then(() => {
-            localStorage.setItem('email', email);
-            localStorage.setItem('phone', phone);
-            localStorage.setItem('password', password);
-          })
-        }, 2000)
+          }).then(()=>{
+            if(res.data.code==200){
+              window.location.href = '/login';
+            }
+          });
+        }, 2000);
+        
+      })
     }
+
+
   }
+
   render(){
     return(
       <div className="AppRegisterContent" data-testid="AppRegisterContent">

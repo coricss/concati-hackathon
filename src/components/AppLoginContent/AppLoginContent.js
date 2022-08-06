@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AppLoginContent.css';
+import axios from 'axios';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -9,7 +10,7 @@ class AppLoginContent extends React.Component {
     super(props);
     this.state = {
       isLogin: false,
-      error: '',
+      // error: '',
       loading: false,
     };
   }
@@ -36,53 +37,112 @@ class AppLoginContent extends React.Component {
     }, 2000);
    
     //login verification
-    if( email == localStorage.getItem('email') && password == localStorage.getItem('password') ){
-      setTimeout(() => {
-        this.setState({
-          isLogin: true
-        });
-        //set email and login status to localstorage for now
-        localStorage.setItem('isLogin', true);
-        var username = email.split('@')[0];
-        localStorage.setItem('username', username);
+    // if( email == this.state.email && password == this.state.password ){
+    //   setTimeout(() => {
+    //     this.setState({
+    //       isLogin: true
+    //     });
+    //     //set email and login status to localstorage for now
+    //     localStorage.setItem('isLogin', true);
+    //     var username = email.split('@')[0];
+    //     localStorage.setItem('username', username);
+    //     window.location.href = '/inbox';
+    //   }, 2000);
+    // }else {
+    //   //alert error when invalid login
+    //   setTimeout(() => {
+    //     this.setState({
+    //       error: 'Invalid email or password'
+    //     });
+    //   }, 2000);
+    // }
+    axios.post('http://localhost:8000/login.php?email='+email+'&password='+password)
+      .then(res=>{
+        console.log(res.data.code);
 
-        const MySwal = withReactContent(Swal)
-        MySwal.fire({
-          title: 'Successfully logged in!',
-          icon: 'success',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-           
-        }).then(() => {
-          window.location.href = '/inbox';
-        })
-      }, 2000);
-    }else {
-      //alert error when invalid login
-      setTimeout(() => {
-        const MySwal = withReactContent(Swal)
-        MySwal.fire({
-          title: 'Invalid email or password',
-          icon: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-           
-        })
-      }, 2000);
-    }
+        if(res.data.code==200){
+          console.log('success');
+          setTimeout(() => {
+            this.setState({
+              isLogin: true
+            });
+            //set email and login status to localstorage for now
+            localStorage.setItem('isLogin', true);
+            var username = email.split('@')[0];
+            localStorage.setItem('username', username);
+            
+            const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: 'Successfully logged in!',
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              
+            }).then(() => {
+              window.location.href = '/inbox';
+            })
+          }, 2000);
+        }else {
+          //alert error when invalid login
+          setTimeout(() => {
+            // this.setState({
+              const error = res.data.message;
+            // });
+            const MySwal = withReactContent(Swal)
+              MySwal.fire({
+                title: 'Invalid email or password',
+                icon: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                
+              })
+          }, 2000);
+        }
+      })
+      .catch(err=>{
+        console.log(err);
+      })
   }
+
+  // getMessage(){
+  //   // e.preventDefault()
+  //   axios.get('http://localhost:8000/login.php')
+  //   .then(res=>{
+  //     console.log(res);
+  //   })
+  //   .catch(err=>{
+  //     console.log(err);
+  //   })
+  // }
+
+  // getPHP(){
+  //   fetch(`http://localhost:8000/login.php`,{
+  //     method:'POST',
+  //     headers:{
+  //       Accept:'application/json',
+  //       'Content-Type':'application/json'
+  //     },
+  //     body:JSON.stringify
+  //   }).then(res=> res.json())
+  //   .then(response=>{
+  //     console.log('response');
+  //     console.log(response);
+  //   })
+  // }
 
   render(){
     return (
+    
       <div className="AppLoginContent" data-testid="AppLoginContent">
         <div className='login-form-container'>
-          <form onSubmit={this.handleLogin}>
+          {/* <form action='http://localhost:8000/login.php' method='POST'> */}
+          <form onSubmit={this.handleLogin} method='POST'>
             <div className="form-group text-uppercase">
               <h1 className='text-danger'>Login</h1>
             </div>
@@ -97,7 +157,7 @@ class AppLoginContent extends React.Component {
                 <input type="password" className="form-control" id="pwd" placeholder="Password" name="password" required />
               </div>
               <div className="form-group w-100">
-                <button className='btn btn-danger btn-lg w-100 rounded-5'>
+                <button className='btn btn-danger btn-lg w-100 rounded-5' name ="login">
                   {
                     this.state.loading == true ? <div className='spinner-border spinner-border-sm' role='status'></div> : 'Login'
                   }

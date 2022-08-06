@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AppPasswordResetContent.css';
+import axios from 'axios';
+
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -9,11 +11,11 @@ class AppPasswordResetContent extends React.Component {
     super(props);
     this.state = {
       enteredEmail: false,
+      isTypeEmail: false,
       sentOTP: false,
       isChangedPass: false,
       registeredEmail: false,
       isTypeEmail: false,
-      email: localStorage.getItem('email'),
       loading: false,
       error: '',
       oneTimePass: '1234'
@@ -23,10 +25,10 @@ class AppPasswordResetContent extends React.Component {
     window.location.href = '/login';
   }
 
- 
-  emailSubmit = (e) => {
+  submitEmail = (e) => {
     e.preventDefault();
-    const emailInput = e.target.email.value;
+
+    let email = e.target.email.value; 
 
     this.setState({
       loading: true
@@ -37,27 +39,24 @@ class AppPasswordResetContent extends React.Component {
       });
     }, 2000);
 
-    if(emailInput==this.state.email){
-      setTimeout(() => {
-        this.setState({
-          enteredEmail: true
-        })
-      }, 2000);
-    }else{
-      setTimeout(() => {
-        const MySwal = withReactContent(Swal)
-        MySwal.fire({
-          title: 'Invalid email',
-          icon: 'error',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
- 
-        })
-      }, 2000);
-    }
+// <<<<<<< HEAD
+    
+  // }
+// =======
+
+  setTimeout(() => {
+    this.setState({
+      enteredEmail: true
+    })
+    axios.post('http://localhost:8000/resetPassword.php?email='+email)
+      .then(res=>{
+        console.log(res);
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+  }, 2000);
+   
   }
 
   sendOTP = (e) => {
@@ -95,13 +94,15 @@ class AppPasswordResetContent extends React.Component {
     }
   }
 
+// >>>>>>> main
   onChangeEmail = (e) => {
     // disable button
     this.setState({
       isTypeEmail: e.target.value.length > 0
     })
   }
-
+// <<<<<<< HEAD
+// =======
   changePassword = (e) => {
     e.preventDefault();
     const new_password = e.target.new_password.value;
@@ -149,8 +150,8 @@ class AppPasswordResetContent extends React.Component {
         })
       } , 2000);
     }
+// >>>>>>> main
   }
-
   render(){
   return(
     <div className="AppPasswordResetContent" data-testid="AppPasswordResetContent">
@@ -219,7 +220,7 @@ class AppPasswordResetContent extends React.Component {
                 <p className='text-white'>
                   Enter your user account's email address and we will send you a password reset link.
                 </p>
-                <form onSubmit={this.emailSubmit}>
+                <form onSubmit={this.submitEmail}>
                   <center className='mt-4'>
                     <div className="form-group mb-3 reset-pass-inputs">
                       <input type="email" className="form-control" id="email" placeholder="Email" name='email' onChange={this.onChangeEmail} required/>

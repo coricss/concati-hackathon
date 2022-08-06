@@ -10,6 +10,14 @@ import AppPasswordReset from './Pages/AppPasswordReset';
 import AppUser from './Pages/AppUser';
 import AppSendMessage from './Pages/AppSendMessage';
 
+import axios from 'axios';
+
+
+
+
+
+axios.defaults.baseURL='http://localhost:8000';
+
 function App() {
   return (
     <div className="App">
