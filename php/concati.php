@@ -175,6 +175,35 @@ class concati{
   
   }
 
+    //set Ratings
+  public function setRate(){
+    $headersRequest = array(
+      "accept: application/json",
+      "Content-Type: application/json",
+  );
+  $headersRequest[] =  "Authorization: Bearer ".(($admin)? $this->Auth() :$this->AuthClient());
+  $ch = curl_init();
+
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headersRequest);
+  curl_setopt($ch, CURLOPT_URL,$this->endpoint."feedback/survey/{survey_id}/answer");
+  curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
+  // curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
+
+  $response = curl_exec($ch);
+  $err = curl_error($ch);
+  $response = (json_decode($response , true));
+  curl_close ($ch);
+  if ($err) {
+    return "cURL Error #:" . $err;
+  } else {
+      return $response['policies'][0]['text'];
+  }
+
+
+
+  }
+
 
   
 
