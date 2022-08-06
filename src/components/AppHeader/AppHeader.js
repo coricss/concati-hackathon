@@ -16,6 +16,10 @@ import {
 
 import { useState } from "react";
 
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 const AppHeader = () => {
 
   const [rating, setRating] = useState(0);
@@ -93,6 +97,33 @@ const AppHeader = () => {
     axios.post('http://localhost:8000/setRate.php?rate='+rate)
     .then(res=>{
       console.log(res);
+
+      if(res.data.code==200){
+        const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: res.data.message,
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              
+            }).then(() => {
+              window.location.href = '/inbox';
+            })
+      }else{
+        const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: res.data.message,
+              icon: 'warning',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            })
+      }
     })
     // const data = new FormData(e.target);
     // const rate = data.get('rate');

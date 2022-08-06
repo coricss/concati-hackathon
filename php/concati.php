@@ -176,7 +176,7 @@ class concati{
   }
 
     //set Ratings
-  public function setRate(){
+  public function setRate($data){
     $headersRequest = array(
       "accept: application/json",
       "Content-Type: application/json",
@@ -187,7 +187,7 @@ class concati{
   curl_setopt($ch, CURLOPT_HTTPHEADER, $headersRequest);
   curl_setopt($ch, CURLOPT_URL,$this->endpoint."feedback/survey/e54cffcd-fb0c-4493-be3a-d28893a3e73d/answer");
   curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
-  // curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+  curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
 
   $response = curl_exec($ch);

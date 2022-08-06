@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import './AppLoginContent.css';
 import axios from 'axios';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 class AppLoginContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //hardcoded for now
-      email: 'rics@gmail.com',
-      password: '123',
       isLogin: false,
-      error: '',
+      // error: '',
       loading: false,
     };
   }
@@ -36,11 +35,30 @@ class AppLoginContent extends React.Component {
         loading: false
       });
     }, 2000);
-  
+   
+    //login verification
+    // if( email == this.state.email && password == this.state.password ){
+    //   setTimeout(() => {
+    //     this.setState({
+    //       isLogin: true
+    //     });
+    //     //set email and login status to localstorage for now
+    //     localStorage.setItem('isLogin', true);
+    //     var username = email.split('@')[0];
+    //     localStorage.setItem('username', username);
+    //     window.location.href = '/inbox';
+    //   }, 2000);
+    // }else {
+    //   //alert error when invalid login
+    //   setTimeout(() => {
+    //     this.setState({
+    //       error: 'Invalid email or password'
+    //     });
+    //   }, 2000);
+    // }
     axios.post('http://localhost:8000/login.php?email='+email+'&password='+password)
       .then(res=>{
         console.log(res.data.code);
-
 
         if(res.data.code==200){
           console.log('success');
@@ -52,23 +70,44 @@ class AppLoginContent extends React.Component {
             localStorage.setItem('isLogin', true);
             var username = email.split('@')[0];
             localStorage.setItem('username', username);
-            window.location.href = '/inbox';
+            
+            const MySwal = withReactContent(Swal)
+            MySwal.fire({
+              title: 'Successfully logged in!',
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              
+            }).then(() => {
+              window.location.href = '/inbox';
+            })
           }, 2000);
         }else {
           //alert error when invalid login
           setTimeout(() => {
-            this.setState({
-              error: res.data.message
-            });
+            // this.setState({
+              const error = res.data.message;
+            // });
+            const MySwal = withReactContent(Swal)
+              MySwal.fire({
+                title: 'Invalid email or password',
+                icon: 'error',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                
+              })
           }, 2000);
         }
       })
       .catch(err=>{
         console.log(err);
       })
-   
-    
-    
   }
 
   // getMessage(){
@@ -81,12 +120,6 @@ class AppLoginContent extends React.Component {
   //     console.log(err);
   //   })
   // }
-
-  resetAlert = () => {
-    this.setState({
-      error: ''
-    });
-  }
 
   // getPHP(){
   //   fetch(`http://localhost:8000/login.php`,{
@@ -105,6 +138,7 @@ class AppLoginContent extends React.Component {
 
   render(){
     return (
+    
       <div className="AppLoginContent" data-testid="AppLoginContent">
         <div className='login-form-container'>
           {/* <form action='http://localhost:8000/login.php' method='POST'> */}
@@ -122,6 +156,8 @@ class AppLoginContent extends React.Component {
                 </div>
                 : null
               }
+              <div className='w-75'>
+              </div>
               <div className="form-group mb-3 login-inputs">
                 <input type="email" className="form-control" id="email" placeholder="Email" name="email" required />
               </div>
