@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import './AppSendMessageContent.css';
 import logo from '../../images/TellMe-logo.png';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import { useParams } from 'react-router';
 
 function withParams(Component) {
@@ -15,7 +18,6 @@ class AppSendMessageContent extends React.Component {
     this.state = {
       sent: false,
       loading: false,
-      alertMessage: ''
     }
   }
 
@@ -41,14 +43,20 @@ class AppSendMessageContent extends React.Component {
     if(message!="" && message!=null){
       this.setState({
         sent: true,
-        alertMessage: 'Your message has been sent!'
-
       });
       setTimeout(() => {
-        this.setState({
-          sent: false,
-         
-        });
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+          title: 'Your message has been sent',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          window.location.reload();
+        })
       }, 2000);
     }
     
@@ -67,14 +75,6 @@ class AppSendMessageContent extends React.Component {
           <hr/>
           <form onSubmit={this.handleSend}>
             <div className="AppSendMessageContent__messages__body">
-              {
-                this.state.sent == true
-                ? <div class="alert alert-success alert-dismissible fade show w-100 mx-0" role="alert">
-                    <small>{this.state.alertMessage}</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
-                  </div>
-                : null
-              }
               <div className="AppSendMessageContent__messages__body__message">
                 <textarea className='w-100 rounded-5' maxLength={200} minLength={10} placeholder='Type your message here..' name="message" required></textarea>
               </div>
