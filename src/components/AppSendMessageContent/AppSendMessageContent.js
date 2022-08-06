@@ -15,13 +15,33 @@ class AppSendMessageContent extends React.Component {
     this.state = {
       sent: false,
       loading: false,
-      alertMessage: ''
+      alertMessage: '',
     }
   }
 
+
   handleSend = (e) => {
     e.preventDefault();
-    const message = e.target.message.value;
+
+    let username=e.target.username.value;
+
+    let messages = localStorage.getItem(username)? JSON.parse(localStorage.getItem(username)):[];
+
+    // console.log(messages);
+
+
+    //get date now
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour:'numeric',minute:'numeric' };
+    const d= new Date();
+    const datenow = d.toLocaleDateString("en-US", options);
+    console.log(datenow);
+    const message ={
+        text:e.target.message.value,
+        timeAgo:datenow
+    } 
+
+    // messages = ['asdadsasd','22222222','333333333']
+    messages.push(message);
     // const data = {
     //   message: message,
     //   username: this.props.params.username,
@@ -39,9 +59,15 @@ class AppSendMessageContent extends React.Component {
     }, 2000);
 
     if(message!="" && message!=null){
+
+
+      localStorage.setItem(username, JSON.stringify(messages));
+
       this.setState({
         sent: true,
         alertMessage: 'Your message has been sent!'
+
+
 
       });
       setTimeout(() => {
@@ -66,6 +92,8 @@ class AppSendMessageContent extends React.Component {
         <div className="AppSendMessageContent__messages text-white">
           <hr/>
           <form onSubmit={this.handleSend}>
+
+            <input type="hidden" name="username" id="username" value ={this.props.params.username}/>
             <div className="AppSendMessageContent__messages__body">
               {
                 this.state.sent == true

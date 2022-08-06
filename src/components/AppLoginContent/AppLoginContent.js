@@ -116,7 +116,7 @@ class AppLoginContent extends React.Component {
             <center className='mt-4'>
               {
                 this.state.error ? 
-                <div class="alert alert-success alert-dismissible fade show w-100 mx-0" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show w-100 mx-0" role="alert">
                   <small>{this.state.error}</small>
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={this.resetAlert}></button>
                 </div>

@@ -181,12 +181,12 @@ class concati{
       "accept: application/json",
       "Content-Type: application/json",
   );
-  $headersRequest[] =  "Authorization: Bearer ".(($admin)? $this->Auth() :$this->AuthClient());
+  $headersRequest[] =  "Authorization: Bearer ".$this->AuthClient();
   $ch = curl_init();
 
   curl_setopt($ch, CURLOPT_HTTPHEADER, $headersRequest);
-  curl_setopt($ch, CURLOPT_URL,$this->endpoint."feedback/survey/{survey_id}/answer");
-  curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
+  curl_setopt($ch, CURLOPT_URL,$this->endpoint."feedback/survey/e54cffcd-fb0c-4493-be3a-d28893a3e73d/answer");
+  curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
   // curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
 
@@ -197,7 +197,7 @@ class concati{
   if ($err) {
     return "cURL Error #:" . $err;
   } else {
-      return $response['policies'][0]['text'];
+      return $response;
   }
 
 

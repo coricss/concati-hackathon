@@ -32,20 +32,26 @@ class AppMessages extends React.Component {
 class AppUserContent extends React.Component {
 
   //Data for messages
-  messages = [
-    {
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
-      timeAgo: '12:00 am'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
-      timeAgo: '12:00 am'
-    },
-    {
-      text: 'Lorem asdasdasd',
-      timeAgo: '12:00 pm'
-    }
-  ];
+
+  username = localStorage.getItem('username');
+
+  messages = localStorage.getItem(this.username)? JSON.parse(localStorage.getItem(this.username)):[];
+
+
+  // messages = [
+  //   {
+  //     text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
+  //     timeAgo: '12:00 am'
+  //   },
+  //   {
+  //     text: 'Lorem ipsum dolor sit amet consectetur adipisicing ',
+  //     timeAgo: '12:00 am'
+  //   },
+  //   {
+  //     text: 'Lorem asdasdasd',
+  //     timeAgo: '12:00 pm'
+  //   }
+  // ];
 
   constructor (props) {
     super(props);
@@ -63,7 +69,7 @@ class AppUserContent extends React.Component {
   }
 
   sentMessages = () => {
-    this.messagesArray = this.messages.map((message) => 
+    this.messagesArray = this.messages.reverse().map((message) => 
       <AppMessages message={message.text} timeAgo={message.timeAgo} />
     );
     return this.messagesArray;
