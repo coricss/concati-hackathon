@@ -63,10 +63,15 @@ class AppUserContent extends React.Component {
   }
 
   sentMessages = () => {
-    this.messagesArray = this.messages.map((message) => 
+    this.messagesArray = this.messages.reverse().map((message) => 
       <AppMessages message={message.text} timeAgo={message.timeAgo} />
     );
-    return this.messagesArray;
+    if( this.messages.length === 0 ){
+      return <p className='text-danger fs-5'>No messages yet</p>
+    }else{
+      return this.messagesArray;
+    }
+  
   }
 
   userCheck = () => {
@@ -92,7 +97,7 @@ class AppUserContent extends React.Component {
 
   render(){
     this.userCheck();
-    this.sentMessages();
+   
     return(
       <div className="AppUserContent" data-testid="AppUserContent">
         <div className="AppUserContent__header text-danger">
@@ -118,7 +123,7 @@ class AppUserContent extends React.Component {
          {
            this.state.isLoading != false
            ? <div className='spinner-border spinner-border-sm' role='status'></div>
-            : <>{this.messagesArray}</>
+            : <>{ this.sentMessages()}</>
          }
         </div>
       </div>
